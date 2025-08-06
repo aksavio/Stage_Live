@@ -1,0 +1,26 @@
+import sys
+import pygame
+import platform
+
+s_width = 0
+s_height = 0
+SCREEN_WIDTH = 0
+SCREEN_HEIGHT = 0
+RES_WIN_W = 1024
+RES_WIN_H = 768
+RES_MAC_W = 1280
+RES_MAC_H = 800
+
+import pyautogui
+
+def get_screen_resolution():
+    width, height = pyautogui.size()
+    return width, height
+
+SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_resolution()
+print(SCREEN_WIDTH)
+print(SCREEN_HEIGHT)
+
+
+HEADER_BG_COLOR = (30,30,30)
+FOOTER_BG_COLOR = (30,30,30)
