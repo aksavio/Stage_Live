@@ -41,6 +41,7 @@ def get_lrc_names_sorted(folder_path):
 def get_lrc_names_sorted_f(folder_path):
     all_files = os.listdir(folder_path)
     lrc_files_f = [f for f in all_files if f.endswith('.lrc') and re.match(r'\d+_.+\.lrc$', f)]
+    lrc_files_f = sorted(lrc_files_f)
     return lrc_files_f
 
 

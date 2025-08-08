@@ -13,7 +13,7 @@ HIGHLIGHT_COLOR = (255, 255, 255)  # White for active text
 FPS = 60
 LYRIC_FILE = 'Ill_Be_Over_You.lrc' # Make sure this file is in the same directory
 
-from core import
+# from core import
 
 # --- Helper Function to Parse LRC File ---
 def parse_lrc(filepath):
