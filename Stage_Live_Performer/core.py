@@ -110,6 +110,7 @@ class LyricsApp:
             self.width, self.height = RES_WIN_W, RES_WIN_H
         running = True
         song_counter = 0
+        self.toggle_fullscreen()
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -154,7 +155,7 @@ class LyricsApp:
             title = Title(file_names[song_counter], self.width, 70)
             title.draw(self.screen)
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(30)
         
         pygame.quit()
     
