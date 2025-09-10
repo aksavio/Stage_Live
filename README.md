@@ -15,3 +15,7 @@ https://github.com/akashrchandran/syrics
 
 ## Arduino CLI HELP
 arduino-cli board listall esp32
+
+
+## rpi packages help
+ sudo pip3 install pyautogui --break-system-packages 
