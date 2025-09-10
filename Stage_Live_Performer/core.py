@@ -1,6 +1,14 @@
 import sys
 import pygame
 import platform
+import serial
+import time
+
+ser = serial.Serial(
+    port='/dev/ttyUSB0',  
+    baudrate=9600,
+    timeout=1  # Timeout in seconds for read operations
+)
 
 
 from config import (SCREEN_WIDTH, SCREEN_HEIGHT, RES_MAC_W, RES_MAC_H, RES_WIN_W, RES_WIN_H, FONT_SIZE, FOOTER_BG_COLOR, FONT_COLOR, LINE_SPACING,HEADER_BG_COLOR, HIGHLIGHT_COLOR)

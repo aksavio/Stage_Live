@@ -40,6 +40,7 @@ void onPitchbend(uint8_t channel, uint16_t value, uint16_t timestamp)
 
 void setup() {
   Serial.begin(115200);
+	while(!Serial){}
   BLEMidiServer.begin("MIDI device");
   BLEMidiServer.setOnConnectCallback([]() {
     Serial.println("Connected");

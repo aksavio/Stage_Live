@@ -11,3 +11,7 @@ This is a set of python programs which would help in the display of lyrics for p
 
 ## links
 https://github.com/akashrchandran/syrics
+
+
+## Arduino CLI HELP
+arduino-cli board listall esp32
