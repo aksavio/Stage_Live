@@ -146,7 +146,7 @@ class LyricsApp:
         global lrc_files_f
         global elapsed_time
         global timer_start
-        msg
+        msg = E
         # Set different resolutions for Mac and Windows
         if self.os_type == "Darwin":  # macOS
             self.width, self.height = RES_MAC_W, RES_MAC_H
