@@ -1,14 +1,51 @@
 import sys
 import pygame
 import platform
-# import serial
+import serial
+import serial.tools.list_ports
 import time
 
-#ser = serial.Serial(
-#    port='/dev/ttyUSB0',  
-#    baudrate=9600,
-#    timeout=1  # Timeout in seconds for read operations
-#)
+HANDSHAKE_REQUEST = "ESP_READY"
+HANDSHAKE_RESPONSE = "PI_ACK"
+
+def find_esp():
+    ports = serial.tools.list_ports.comports()
+    for port in ports:
+        try:
+            print(f"Trying {port.device}...")
+            ser = serial.Serial(port.device, 115200, timeout=2)
+            time.sleep(2)  # wait for ESP reset on new serial connection
+
+            # give ESP time to send message
+            line = ser.readline().decode("utf-8").strip()
+            if line == HANDSHAKE_REQUEST:
+                print(f"✅ Found ESP on {port.device}")
+                ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
+                return ser  # return the open serial connection
+            else:
+                print(f"No handshake message from {port.device} (got: '{line}')")
+                ser.close()
+        except Exception as e:
+            print(f"Error with {port.device}: {e}")
+    return None
+
+if __name__ == "__main__":
+    esp_serial = find_esp()
+    if esp_serial:
+        print("Handshake complete! You can now communicate with the ESP.")
+        try:
+            while True:
+                if esp_serial.in_waiting:
+                    msg = esp_serial.readline().decode().strip()
+                    print(f"[ESP] {msg}")
+                    esp_serial.write(b"Hello back from Pi!\n")
+                time.sleep(1)
+        except KeyboardInterrupt:
+            esp_serial.close()
+            print("Closed connection.")
+    else:
+        print("No ESP found.")
+
 
 
 from config import (SCREEN_WIDTH, SCREEN_HEIGHT, RES_MAC_W, RES_MAC_H, RES_WIN_W, RES_WIN_H, FONT_SIZE, FOOTER_BG_COLOR, FONT_COLOR, LINE_SPACING,HEADER_BG_COLOR, HIGHLIGHT_COLOR)
@@ -109,6 +146,7 @@ class LyricsApp:
         global lrc_files_f
         global elapsed_time
         global timer_start
+        msg
         # Set different resolutions for Mac and Windows
         if self.os_type == "Darwin":  # macOS
             self.width, self.height = RES_MAC_W, RES_MAC_H
@@ -119,7 +157,13 @@ class LyricsApp:
         running = True
         song_counter = 0
         self.toggle_fullscreen()
+        time.sleep(2)
         while running:
+            if esp_serial.in_waiting:
+                    msg = esp_serial.readline().decode().strip()
+                    song_counter = msg
+                    print("serial")
+                    print(msg)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False

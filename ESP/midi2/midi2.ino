@@ -45,34 +45,34 @@ void onPitchbend(uint8_t channel, uint16_t value, uint16_t timestamp)
 void setup()
 {
     Serial.begin(115200);
-    delay(2000);                       // wait for Serial to come up
-    Serial.println(HANDSHAKE_REQUEST); // tell Pi that ESP is ready
+    delay(2000); // wait for Serial to come up
+    // Serial.println(HANDSHAKE_REQUEST); // tell Pi that ESP is ready
     while (!handshakeDone)
     {
+        Serial.println(HANDSHAKE_REQUEST); // tell Pi that ESP is ready
         if (!handshakeDone && Serial.available())
         {
             String msg = Serial.readStringUntil('\n');
             msg.trim();
             if (msg == HANDSHAKE_RESPONSE)
             {
-                Serial.println("Handshake successful!");
+                // Serial.println("Handshake successful!");
                 handshakeDone = true;
             }
         }
-        Serial.println(HANDSHAKE_REQUEST); // tell Pi that ESP is ready
-        delay(100);
+        delay(2000);
     }
     if (handshakeDone)
     {
-        Serial.println("Hello from ESP!");
+        // Serial.println("Hello from ESP!");
         delay(2000);
     }
 
     BLEMidiServer.begin("MIDI device");
-    BLEMidiServer.setOnConnectCallback([]()
-                                       { Serial.println("Connected"); });
-    BLEMidiServer.setOnDisconnectCallback([]()
-                                          { Serial.println("Disconnected"); });
+    // BLEMidiServer.setOnConnectCallback([]()
+    //                                    { Serial.println("Connected"); });
+    // BLEMidiServer.setOnDisconnectCallback([]()
+    //                                       { Serial.println("Disconnected"); });
     BLEMidiServer.setNoteOnCallback(onNoteOn);
     BLEMidiServer.setNoteOffCallback(onNoteOff);
     BLEMidiServer.setAfterTouchPolyCallback(onAfterTouchPoly);
@@ -85,4 +85,10 @@ void setup()
 
 void loop()
 {
+    Serial.println("0");
+    delay(4000);
+    Serial.println("1");
+    delay(4000);
+    Serial.println("3");
+    delay(4000);
 }
