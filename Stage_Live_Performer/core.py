@@ -198,11 +198,11 @@ class LyricsApp:
         running = True
         song_counter = 0
         self.toggle_fullscreen()
-        time.sleep(2)
+        time.sleep(5)
         while running:
             if esp_serial.in_waiting:
                     msg = esp_serial.readline().decode().strip()
-                    song_counter = msg
+                    song_counter = 0
                     print("serial")
                     print(msg)
             for event in pygame.event.get():
