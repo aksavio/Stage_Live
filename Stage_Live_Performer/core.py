@@ -161,22 +161,22 @@ class LyricsApp:
                     print(f"Error with {port.device}: {e}")
             return port.device
         
-        if __name__ == "__main__":
-            esp_serial = find_esp()
-            if esp_serial:
-                print("Handshake complete! You can now communicate with the ESP.")
-                try:
-                    while True:
-                        if esp_serial.in_waiting:
-                            msg = esp_serial.readline().decode().strip()
-                            print(f"[ESP] {msg}")
-                            esp_serial.write(b"Hello back from Pi!\n")
-                        time.sleep(1)
-                except KeyboardInterrupt:
-                    esp_serial.close()
-                    print("Closed connection.")
-            else:
-                print("No ESP found.") 
+
+        esp_serial = find_esp()
+        if esp_serial:
+            print("Handshake complete! You can now communicate with the ESP.")
+            try:
+                while True:
+                    if esp_serial.in_waiting:
+                        msg = esp_serial.readline().decode().strip()
+                        print(f"[ESP] {msg}")
+                        esp_serial.write(b"Hello back from Pi!\n")
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                esp_serial.close()
+                print("Closed connection.")
+        else:
+            print("No ESP found.") 
         
 
         global song_counter
