@@ -139,6 +139,7 @@ class LyricsApp:
             self.screen = pygame.display.set_mode((self.width, self.height))
     
     
+    
     def run(self):
         def find_esp():
             ports = serial.tools.list_ports.comports()
@@ -199,6 +200,13 @@ class LyricsApp:
         song_counter = 0
         self.toggle_fullscreen()
         time.sleep(5)
+        def is_integer(s: str) -> bool:
+            try:
+                int(s)
+                return True
+            except ValueError:
+                return False
+    
         while running:
             if esp_serial:
                     msg = esp_serial.readline().decode("utf-8", errors="ignore").strip()
