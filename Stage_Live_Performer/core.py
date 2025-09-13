@@ -201,8 +201,9 @@ class LyricsApp:
         time.sleep(5)
         while running:
             if esp_serial:
-                    msg = esp_serial.readline().decode().strip()
-                    song_counter = msg
+                    msg = esp_serial.readline().decode("utf-8", errors="ignore").strip()
+                    if is_integer(msg):
+                        song_counter = msg
                     print("serial")
                     print(msg)
             for event in pygame.event.get():
