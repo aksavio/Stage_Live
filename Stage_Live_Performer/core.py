@@ -200,7 +200,7 @@ class LyricsApp:
         self.toggle_fullscreen()
         time.sleep(5)
         while running:
-            if esp_serial.in_waiting:
+            if esp_serial:
                     msg = esp_serial.readline().decode().strip()
                     song_counter = 0
                     print("serial")
