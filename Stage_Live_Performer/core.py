@@ -145,7 +145,7 @@ class LyricsApp:
             for port in ports:
                 try:
                     print(f"Trying {port.device}...")
-                    ser = serial.Serial(port.device, 115200, timeout=2)
+                    ser = serial.Serial(port.device, 115200, timeout=0)
                     time.sleep(2)  # wait for ESP reset on new serial connection
 
                     # give ESP time to send message
@@ -202,7 +202,7 @@ class LyricsApp:
         while running:
             if esp_serial:
                     msg = esp_serial.readline().decode().strip()
-                    song_counter = 0
+                    song_counter = msg
                     print("serial")
                     print(msg)
             for event in pygame.event.get():

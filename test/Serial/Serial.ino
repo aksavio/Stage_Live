@@ -27,7 +27,7 @@ void loop()
 
   if (handshakeDone)
   {
-    Serial.println("Hello from ESP!");
+    Serial.println("3");
     delay(2000);
   }
 }
