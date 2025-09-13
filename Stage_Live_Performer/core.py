@@ -186,7 +186,7 @@ class LyricsApp:
         global lrc_files_f
         global elapsed_time
         global timer_start
-        global esp_serial
+        
         msg = "E"
         # Set different resolutions for Mac and Windows
         if self.os_type == "Darwin":  # macOS
