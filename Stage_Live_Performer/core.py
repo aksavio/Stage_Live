@@ -159,7 +159,7 @@ class LyricsApp:
                         ser.close()
                 except Exception as e:
                     print(f"Error with {port.device}: {e}")
-            return port.device
+            return None
         
 
         esp_serial = find_esp()
