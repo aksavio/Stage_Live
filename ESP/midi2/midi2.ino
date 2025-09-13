@@ -56,7 +56,7 @@ void setup()
             msg.trim();
             if (msg == HANDSHAKE_RESPONSE)
             {
-                // Serial.println("Handshake successful!");
+                Serial.println("Handshake successful!");
                 handshakeDone = true;
             }
         }
@@ -69,10 +69,10 @@ void setup()
     }
 
     BLEMidiServer.begin("MIDI device");
-    // BLEMidiServer.setOnConnectCallback([]()
-    //                                    { Serial.println("Connected"); });
-    // BLEMidiServer.setOnDisconnectCallback([]()
-    //                                       { Serial.println("Disconnected"); });
+    BLEMidiServer.setOnConnectCallback([]()
+                                       { Serial.println("Connected"); });
+    BLEMidiServer.setOnDisconnectCallback([]()
+                                          { Serial.println("Disconnected"); });
     BLEMidiServer.setNoteOnCallback(onNoteOn);
     BLEMidiServer.setNoteOffCallback(onNoteOff);
     BLEMidiServer.setAfterTouchPolyCallback(onAfterTouchPoly);
