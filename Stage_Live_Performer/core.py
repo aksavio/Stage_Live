@@ -27,7 +27,7 @@ def find_esp():
                 ser.close()
         except Exception as e:
             print(f"Error with {port.device}: {e}")
-    return None
+    return port.device
 
 if __name__ == "__main__":
     esp_serial = find_esp()
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     else:
         print("No ESP found.")
 
-
+# esp_s = serial.Serial(find_esp, 115200, timeout=0)
 
 from config import (SCREEN_WIDTH, SCREEN_HEIGHT, RES_MAC_W, RES_MAC_H, RES_WIN_W, RES_WIN_H, FONT_SIZE, FOOTER_BG_COLOR, FONT_COLOR, LINE_SPACING,HEADER_BG_COLOR, HIGHLIGHT_COLOR)
 window_width = 0
@@ -146,6 +146,7 @@ class LyricsApp:
         global lrc_files_f
         global elapsed_time
         global timer_start
+        global esp_serial
         msg = "E"
         # Set different resolutions for Mac and Windows
         if self.os_type == "Darwin":  # macOS
