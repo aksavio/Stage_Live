@@ -90,6 +90,25 @@ print(song_lyrics)
 elapsed_time = 0
 timer_start = 0
 
+def find_esp():
+    ports = serial.tools.list_ports.comports()
+    for port in ports:
+        try:
+            print(f"Trying {port.device}...")
+            ser = serial.Serial(port.device, 115200, timeout=2)
+            time.sleep(2)  # wait for ESP reset
+            line = ser.readline().decode("utf-8").strip()
+            if line == HANDSHAKE_REQUEST:
+                print(f"✅ Found ESP on {port.device}")
+                ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
+                return ser
+            else:
+                print(f"No handshake from {port.device} (got: '{line}')")
+                ser.close()
+        except Exception as e:
+            print(f"Error with {port.device}: {e}")
+    return None
+
 class LyricsApp:
 
     def __init__(self):
@@ -141,30 +160,31 @@ class LyricsApp:
     global port1
     
     def run(self):
-        def find_esp():
-            ports = serial.tools.list_ports.comports()
-            for port in ports:
-                try:
-                    print(f"Trying {port.device}...")
-                    ser = serial.Serial(port.device, 115200, timeout=2)
-                    time.sleep(2)  # wait for ESP reset on new serial connection
+        # def find_esp(self):
+        #     ports = serial.tools.list_ports.comports()
+        #     for port in ports:
+        #         try:
+        #             print(f"Trying {port.device}...")
+        #             ser = serial.Serial(port.device, 115200, timeout=2)
+        #             time.sleep(2)  # wait for ESP reset on new serial connection
 
-                    # give ESP time to send message
-                    line = ser.readline().decode("utf-8").strip()
-                    if line == HANDSHAKE_REQUEST:
-                        print(f"✅ Found ESP on {port.device}")
-                        ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
-                        port1 = port.device
-                        return ser  # return the open serial connection
-                    else:
-                        print(f"No handshake message from {port.device} (got: '{line}')")
-                        ser.close()
-                except Exception as e:
-                    print(f"Error with {port.device}: {e}")
-            return None
+        #             # give ESP time to send message
+        #             line = ser.readline().decode("utf-8").strip()
+        #             if line == HANDSHAKE_REQUEST:
+        #                 print(f"✅ Found ESP on {port.device}")
+        #                 ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
+        #                 port1 = port.device
+        #                 return ser  # return the open serial connection
+        #             else:
+        #                 print(f"No handshake message from {port.device} (got: '{line}')")
+        #                 ser.close()
+        #         except Exception as e:
+        #             print(f"Error with {port.device}: {e}")
+        #     return None
         
+        global esp_serial
+        esp_serial = find_esp()
 
-    esp_serial = find_esp()
     if esp_serial:
         print("Handshake complete! You can now communicate with the ESP.")
             # try:
