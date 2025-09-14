@@ -146,7 +146,7 @@ class LyricsApp:
             for port in ports:
                 try:
                     print(f"Trying {port.device}...")
-                    ser = serial.Serial(port.device, 115200, timeout=0)
+                    ser = serial.Serial(port.device, 115200, timeout=2)
                     time.sleep(2)  # wait for ESP reset on new serial connection
 
                     # give ESP time to send message
