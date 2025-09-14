@@ -1,4 +1,9 @@
 #include <Arduino.h>
+#include <Adafruit_NeoPixel.h>
+
+#define LED_PIN 21
+#define NUM_LEDS 1
+Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 #define HANDSHAKE_REQUEST "ESP_READY"
 #define HANDSHAKE_RESPONSE "PI_ACK"
@@ -44,6 +49,10 @@ void onPitchbend(uint8_t channel, uint16_t value, uint16_t timestamp)
 
 void setup()
 {
+    strip.begin();
+    strip.show();
+    strip.setPixelColor(0, strip.Color(0, 100, 0)); // Red
+    strip.show();
     Serial.begin(115200);
     delay(2000); // wait for Serial to come up
     // Serial.println(HANDSHAKE_REQUEST); // tell Pi that ESP is ready
@@ -67,12 +76,14 @@ void setup()
         // Serial.println("Hello from ESP!");
         delay(2000);
     }
-
+    strip.setPixelColor(0, strip.Color(100, 100, 0));
+    strip.show();
+    delay(1000);
     BLEMidiServer.begin("MIDI device");
     BLEMidiServer.setOnConnectCallback([]()
-                                       { Serial.println("Connected"); });
+                                       { Serial.println("Connected");strip.setPixelColor(0, strip.Color(100, 0, 0));strip.show(); });
     BLEMidiServer.setOnDisconnectCallback([]()
-                                          { Serial.println("Disconnected"); });
+                                          { Serial.println("Disconnected");strip.setPixelColor(0, strip.Color(100, 100, 0));strip.show(); });
     BLEMidiServer.setNoteOnCallback(onNoteOn);
     BLEMidiServer.setNoteOffCallback(onNoteOff);
     BLEMidiServer.setAfterTouchPolyCallback(onAfterTouchPoly);
@@ -87,8 +98,8 @@ void loop()
 {
     Serial.println("0");
     delay(4000);
-    Serial.println("1");
-    delay(4000);
-    Serial.println("3");
-    delay(4000);
+    Serial.println("2");
+    delay(30000);
+    Serial.println("5");
+    delay(20000);
 }
