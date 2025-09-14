@@ -210,9 +210,7 @@ class LyricsApp:
         
     
         while running:
-
-            for event in pygame.event.get():
-                if esp_serial and esp_serial.in_waiting > 0:
+            if esp_serial and esp_serial.in_waiting > 0:
                     raw = esp_serial.readline().decode("utf-8", errors="ignore").strip()
                     if is_integer(raw):
                         song_counter = int(raw)  # convert safely to int
@@ -221,6 +219,7 @@ class LyricsApp:
                         if raw:  # skip empty strings
                             print(f"[ESP] Non-integer message: {raw}")
                             
+            for event in pygame.event.get():     
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.KEYDOWN:
@@ -237,21 +236,22 @@ class LyricsApp:
                         song_counter = song_counter + 1
                         if song_counter > song_counter_l:
                             song_counter = song_counter_l
-                    print(song_counter)
-                    self.file_path = f"{folder}/{file_names_f[song_counter]}"
-                    self.lyrics = parse_lrc(self.file_path)
-                    song_lyrics = self.lyrics
-                    print(file_names_f[song_counter])
-                    start_time = 0
-                    self.current_line_index = -1
-                    # Scrolling variables
-                    self.scroll_y = 0
-                    self.target_scroll_y = 0
-                    print(song_lyrics)
-                    self.start_time = 0
-                    elapsed_time = 0
-                    timer_start = pygame.time.get_ticks()
-
+                            
+            
+            print(song_counter)
+            self.file_path = f"{folder}/{file_names_f[song_counter]}"
+            self.lyrics = parse_lrc(self.file_path)
+            song_lyrics = self.lyrics
+            print(file_names_f[song_counter])
+            start_time = 0
+            self.current_line_index = -1
+            # Scrolling variables
+            self.scroll_y = 0
+            self.target_scroll_y = 0
+            print(song_lyrics)
+            self.start_time = 0
+            elapsed_time = 0
+            timer_start = pygame.time.get_ticks()
             # Drawing Graphics
             # self.screen = pygame.display.set_mode((self.width, self.height), pygame.SCALED | pygame.RESIZABLE | pygame.HIDDEN | pygame.NOFRAME | pygame.OPENGL | pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE | pygame.ASYNCBLIT)
             # self.screen = pygame.display.set_mode((self.width, self.height), pygame.SCALED)
