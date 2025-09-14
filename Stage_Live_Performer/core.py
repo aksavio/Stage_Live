@@ -206,14 +206,19 @@ class LyricsApp:
                 return True
             except ValueError:
                 return False
+            
+        
     
         while running:
-            if esp_serial:
-                    msg = esp_serial.readline().decode("utf-8", errors="ignore").strip()
-                    if is_integer(msg):
-                        song_counter = msg
-                    print("serial")
-                    print(msg)
+            if esp_serial and esp_serial.in_waiting > 0:
+                raw = esp_serial.readline().decode("utf-8", errors="ignore").strip()
+                if is_integer(raw):
+                    song_counter = int(raw)  # convert safely to int
+                    print(f"[ESP] Updated song_counter → {song_counter}")
+                else:
+                    if raw:  # skip empty strings
+                        print(f"[ESP] Non-integer message: {raw}")
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
