@@ -90,25 +90,6 @@ print(song_lyrics)
 elapsed_time = 0
 timer_start = 0
 
-def find_esp():
-    ports = serial.tools.list_ports.comports()
-    for port in ports:
-        try:
-            print(f"Trying {port.device}...")
-            ser = serial.Serial(port.device, 115200, timeout=2)
-            time.sleep(2)  # wait for ESP reset
-            line = ser.readline().decode("utf-8").strip()
-            if line == HANDSHAKE_REQUEST:
-                print(f"✅ Found ESP on {port.device}")
-                ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
-                return ser
-            else:
-                print(f"No handshake from {port.device} (got: '{line}')")
-                ser.close()
-        except Exception as e:
-            print(f"Error with {port.device}: {e}")
-    return None
-
 class LyricsApp:
 
     def __init__(self):
@@ -157,36 +138,34 @@ class LyricsApp:
         else:
             self.screen = pygame.display.set_mode((self.width, self.height))
     
-    global port1
+    
     
     def run(self):
-        # def find_esp(self):
-        #     ports = serial.tools.list_ports.comports()
-        #     for port in ports:
-        #         try:
-        #             print(f"Trying {port.device}...")
-        #             ser = serial.Serial(port.device, 115200, timeout=2)
-        #             time.sleep(2)  # wait for ESP reset on new serial connection
+        def find_esp():
+            ports = serial.tools.list_ports.comports()
+            for port in ports:
+                try:
+                    print(f"Trying {port.device}...")
+                    ser = serial.Serial(port.device, 115200, timeout=0)
+                    time.sleep(2)  # wait for ESP reset on new serial connection
 
-        #             # give ESP time to send message
-        #             line = ser.readline().decode("utf-8").strip()
-        #             if line == HANDSHAKE_REQUEST:
-        #                 print(f"✅ Found ESP on {port.device}")
-        #                 ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
-        #                 port1 = port.device
-        #                 return ser  # return the open serial connection
-        #             else:
-        #                 print(f"No handshake message from {port.device} (got: '{line}')")
-        #                 ser.close()
-        #         except Exception as e:
-        #             print(f"Error with {port.device}: {e}")
-        #     return None
+                    # give ESP time to send message
+                    line = ser.readline().decode("utf-8").strip()
+                    if line == HANDSHAKE_REQUEST:
+                        print(f"✅ Found ESP on {port.device}")
+                        ser.write((HANDSHAKE_RESPONSE + "\n").encode("utf-8"))
+                        return ser  # return the open serial connection
+                    else:
+                        print(f"No handshake message from {port.device} (got: '{line}')")
+                        ser.close()
+                except Exception as e:
+                    print(f"Error with {port.device}: {e}")
+            return None
         
-        global esp_serial
-        esp_serial = find_esp()
 
-    if esp_serial:
-        print("Handshake complete! You can now communicate with the ESP.")
+        esp_serial = find_esp()
+        if esp_serial:
+            print("Handshake complete! You can now communicate with the ESP.")
             # try:
             #     while True:
             #         if esp_serial.in_waiting:
@@ -197,18 +176,10 @@ class LyricsApp:
             # except KeyboardInterrupt:
             #     esp_serial.close()
             #     print("Closed connection.")
-    else:
-        print("No ESP found.") 
+        else:
+            print("No ESP found.") 
         
-    # val1 =0
 
-    def read_esp():
-        val1 = serial.Serial(port1, 115200, timeout=0) 
-        return None
-        
-    esp_read = read_esp()
-
-    def run(self):  
         global song_counter
         global song_counter_l
         global start_time
@@ -216,7 +187,6 @@ class LyricsApp:
         global lrc_files_f
         global elapsed_time
         global timer_start
-        global esp_read
         
         msg = "E"
         # Set different resolutions for Mac and Windows
@@ -238,12 +208,12 @@ class LyricsApp:
                 return False
     
         while running:
-            msg = esp_read.readline().decode("utf-8", errors="ignore").strip()
-            if is_integer(msg):
-                song_counter = msg
-                print("serial")
-                print(msg)
-
+            if esp_serial:
+                    msg = esp_serial.readline().decode("utf-8", errors="ignore").strip()
+                    if is_integer(msg):
+                        song_counter = msg
+                    print("serial")
+                    print(msg)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
