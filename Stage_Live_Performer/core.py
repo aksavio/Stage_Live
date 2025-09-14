@@ -215,6 +215,20 @@ class LyricsApp:
                     if is_integer(raw):
                         song_counter = int(raw)  # convert safely to int
                         print(f"[ESP] Updated song_counter → {song_counter}")
+                        print(song_counter)
+                        self.file_path = f"{folder}/{file_names_f[song_counter]}"
+                        self.lyrics = parse_lrc(self.file_path)
+                        song_lyrics = self.lyrics
+                        print(file_names_f[song_counter])
+                        start_time = 0
+                        self.current_line_index = -1
+                        # Scrolling variables
+                        self.scroll_y = 0
+                        self.target_scroll_y = 0
+                        print(song_lyrics)
+                        self.start_time = 0
+                        elapsed_time = 0
+                        timer_start = pygame.time.get_ticks() 
                     else:
                         if raw:  # skip empty strings
                             print(f"[ESP] Non-integer message: {raw}")
@@ -236,22 +250,21 @@ class LyricsApp:
                         song_counter = song_counter + 1
                         if song_counter > song_counter_l:
                             song_counter = song_counter_l
-                            
-            
-            print(song_counter)
-            self.file_path = f"{folder}/{file_names_f[song_counter]}"
-            self.lyrics = parse_lrc(self.file_path)
-            song_lyrics = self.lyrics
-            print(file_names_f[song_counter])
-            start_time = 0
-            self.current_line_index = -1
-            # Scrolling variables
-            self.scroll_y = 0
-            self.target_scroll_y = 0
-            print(song_lyrics)
-            self.start_time = 0
-            elapsed_time = 0
-            timer_start = pygame.time.get_ticks()
+                             
+                print(song_counter)
+                self.file_path = f"{folder}/{file_names_f[song_counter]}"
+                self.lyrics = parse_lrc(self.file_path)
+                song_lyrics = self.lyrics
+                print(file_names_f[song_counter])
+                start_time = 0
+                self.current_line_index = -1
+                # Scrolling variables
+                self.scroll_y = 0
+                self.target_scroll_y = 0
+                print(song_lyrics)
+                self.start_time = 0
+                elapsed_time = 0
+                timer_start = pygame.time.get_ticks()
             # Drawing Graphics
             # self.screen = pygame.display.set_mode((self.width, self.height), pygame.SCALED | pygame.RESIZABLE | pygame.HIDDEN | pygame.NOFRAME | pygame.OPENGL | pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE | pygame.ASYNCBLIT)
             # self.screen = pygame.display.set_mode((self.width, self.height), pygame.SCALED)
