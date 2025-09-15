@@ -34,7 +34,8 @@ void onControlChange(uint8_t channel, uint8_t controller, uint8_t value, uint16_
 
 void onProgramChange(uint8_t channel, uint8_t program, uint16_t timestamp)
 {
-    Serial.printf("Program change : channel %d, program %d (timestamp %dms)\n", channel, program, timestamp);
+    // Serial.printf("Program change : channel %d, program %d (timestamp %dms)\n", channel, program, timestamp);
+    Serial.println(program);
 }
 
 void onAfterTouch(uint8_t channel, uint8_t pressure, uint16_t timestamp)
