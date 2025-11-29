@@ -20,7 +20,8 @@ def get_screen_resolution():
 SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_resolution()
 print(SCREEN_WIDTH)
 print(SCREEN_HEIGHT)
-
+RES_WIN_H = SCREEN_HEIGHT
+RES_WIN_W = SCREEN_WIDTH
 
 HEADER_BG_COLOR = (30,30,30)
 FOOTER_BG_COLOR = (30,30,30)

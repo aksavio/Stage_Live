@@ -19,3 +19,9 @@ arduino-cli board listall esp32
 
 ## rpi packages help
  sudo pip3 install pyautogui --break-system-packages 
+
+## notes
+
+- improve the esp to rpi communication
+- use the new.py in the Stage_Live_Desktop to make the .lrc files
+- for now use program change in midi 
