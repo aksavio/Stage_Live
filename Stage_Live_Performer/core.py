@@ -261,7 +261,7 @@ class LyricsApp:
                 # Scrolling variables
                 self.scroll_y = 0
                 self.target_scroll_y = 0
-                print(song_lyrics)
+                # print(song_lyrics)
                 self.start_time = 0
                 elapsed_time = 0
                 timer_start = pygame.time.get_ticks()
