@@ -74,7 +74,7 @@ void setup()
     }
     if (handshakeDone)
     {
-        // Serial.println("Hello from ESP!");
+        Serial.println("Hello from ESP!");
         delay(2000);
     }
     strip.setPixelColor(0, strip.Color(100, 100, 0));
