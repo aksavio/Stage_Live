@@ -97,10 +97,10 @@ void setup()
 
 void loop()
 {
-    Serial.println("0");
-    delay(4000);
-    Serial.println("2");
-    delay(30000);
-    Serial.println("5");
-    delay(20000);
+    // Serial.println("0");
+    // delay(4000);
+    // Serial.println("2");
+    // delay(30000);
+    // Serial.println("5");
+    // delay(20000);
 }

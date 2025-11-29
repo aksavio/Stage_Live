@@ -25,7 +25,7 @@ print(SCREEN_HEIGHT)
 HEADER_BG_COLOR = (30,30,30)
 FOOTER_BG_COLOR = (30,30,30)
 
-FONT_SIZE = 36
+FONT_SIZE = 48
 LINE_SPACING = 15
 FONT_COLOR = (179, 179, 179)  # Lighter gray for inactive text
 HIGHLIGHT_COLOR = (255, 255, 255)  # White for active text
