@@ -327,7 +327,7 @@ class LyricsSyncApp:
             messagebox.showwarning("Playback Error", "Audio playback not detected.")
             return
 
-        self.time_stamps[self.current_line_idx] = pos_millis
+        self.time_stamps[self.current_line_idx + 1] = pos_millis
         self.current_line_idx += 1
         if self.current_line_idx < len(self.lyrics_lines):
             self.update_lyric_display()
