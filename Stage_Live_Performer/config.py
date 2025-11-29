@@ -26,7 +26,7 @@ RES_WIN_W = SCREEN_WIDTH
 HEADER_BG_COLOR = (30,30,30)
 FOOTER_BG_COLOR = (30,30,30)
 
-FONT_SIZE = 64
+FONT_SIZE = 56
 LINE_SPACING = 15
 FONT_COLOR = (179, 179, 179)  # Lighter gray for inactive text
 HIGHLIGHT_COLOR = (255, 255, 255)  # White for active text
