@@ -1,6 +1,15 @@
 # Stage_Live
 This is a set of python programs which would help in the display of lyrics for performances on stage.
 
+
+# How to make use it?
+- use the file midi2.ino for the ESP setup
+- Stage_Live_Desktop is the folder where you will find the new.py to make the .lrc file
+- always have the name of the song as the first line of your lyric file.
+- Stage_Live_Performer has the main.py which needs to run on a raspberry pi or  the system which you are connecting to your display.
+
+
+
 ## Things to do
 -  make a pygame window that works in Windows, Mac and Linux.               Done
 -  make it work in windowed mode and in full screen mode.                   Done
@@ -25,3 +34,5 @@ arduino-cli board listall esp32
 - improve the esp to rpi communication
 - use the new.py in the Stage_Live_Desktop to make the .lrc files
 - for now use program change in midi 
+
+# 
