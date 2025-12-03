@@ -2,7 +2,7 @@
 This is a set of python programs which would help in the display of lyrics for performances on stage.
 
 
-# How to make use it?
+# How to use it?
 - use the file midi2.ino for the ESP setup
 - Stage_Live_Desktop is the folder where you will find the new.py to make the .lrc file
 - always have the name of the song as the first line of your lyric file.
