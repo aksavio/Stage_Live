@@ -11,10 +11,12 @@ This is a set of python programs which would help in the display of lyrics for p
 ## Stage Live Desktop
 - Always have something other than the lyrics on the first line of the lyric text file.
 
-` Random text`
-`Lyric line 1`
-`Lyric line 2`
-`...`
+\`\`\`
+Random text
+Lyric line 1
+Lyric line 2
+...
+\`\`\`
 
 - Space bar to advance to the next line of the lyrics as you play your audio file.
 
