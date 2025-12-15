@@ -29,6 +29,7 @@ Lyric line 2
 01_name1_name1.lrc
 ...
 ```
+- run the main.py
 
 ## Things to do
 -  make a pygame window that works in Windows, Mac and Linux.               Done
