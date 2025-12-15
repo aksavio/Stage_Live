@@ -23,9 +23,12 @@ Lyric line 2
 ## Stage live Performer
 - Put your generated *.lrc files in the Lyric folder.
 - syntax of the files should be
-` 00_name_name.lrc
+
+```
+00_name_name.lrc
 01_name1_name1.lrc
-  ... `
+...
+```
 
 ## Things to do
 -  make a pygame window that works in Windows, Mac and Linux.               Done
