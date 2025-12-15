@@ -8,7 +8,22 @@ This is a set of python programs which would help in the display of lyrics for p
 - always have the name of the song as the first line of your lyric file.
 - Stage_Live_Performer has the main.py which needs to run on a raspberry pi or  the system which you are connecting to your display.
 
+## Stage Live Desktop
+- Always have something other than the lyrics on the first line of the lyric text file.
 
+` Random text
+Lyric line 1
+Lyric line 2
+...
+`
+- Space bar to advance to the next line of the lyrics as you play your audio file.
+
+## Stage live Performer
+- Put your generated *.lrc files in the Lyric folder.
+- syntax of the files should be
+` 00_name_name.lrc
+01_name1_name1.lrc
+  ... `
 
 ## Things to do
 -  make a pygame window that works in Windows, Mac and Linux.               Done
